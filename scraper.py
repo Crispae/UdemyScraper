@@ -10,15 +10,17 @@ import database_handler
 import Email_temp
 import Email_handler
 
-"""   This is the which will scrape the website 
-      udemylearn.blogpost.com for the update of new courses and
-       it will save the link of the new discounted courses
-       an and send you a e-mail for latest notifcation.
+"""
+   This is the which will scrape the website 
+    udemylearn.blogpost.com for the update of new courses and
+    it will save the link of the new discounted courses
+    an and send you a e-mail for latest notifcation.
        
 """
 current_date =  date.today()
 
 def scrape():
+    BASE_URL = "https://www.booksandcoupons.com/"
     course_list = []
     course_dict = {}
     udemy_url = []
@@ -26,14 +28,14 @@ def scrape():
     scraper = cloudscraper.create_scraper(browser)
     # Creating a cloudscraper object so that will bypass any cloudscraper protection
     try:
-        r = scraper.get("https://udemylearn.blogspot.com/")
-    except error as e:
-        print(e)
+        r = scraper.get(BASE_URL) ## base url
+    except:
+        raise ValueError("Fetching site error")
 
     try:
         soup = BS(r.text,"html.parser")
         # Use beutifulsoup to pasre the html data extract information data.
-        header_courses = soup.find("h3",class_="post-title")
+        header_courses = soup.find("h3",class_="post-title entry-title")
         for i,tag in enumerate(header_courses):
             course_list.insert(1,(tag.text,tag["href"]))
         courses = soup.find_all("h3",class_="post-title entry-title")
