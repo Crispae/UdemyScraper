@@ -1,1 +1,3 @@
-This is a program which will scrape free course link from website and store it in databse and then send it to the client using email
+#This repo consist of scripts which will scrape free courses from the unofficial websites.
+
+*Feel free to make a pull request for further updated, new changes are welcomed.
